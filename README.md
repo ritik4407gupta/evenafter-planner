@@ -1,8 +1,6 @@
 # EverAfter — Event Planning Assistant
 
-A full-stack, UI-first event planning workspace for weddings, birthdays, anniversaries, community events, and the little gatherings that become big memories.
-
-The project is designed around a warm editorial look: soft blush, peach, sage, lilac and honey colours; floral illustration details; small motion transitions; a task board; editable budget allocations; vendor and guest management; and a celebration burst when a task is completed.
+EverAfter is a GenAI-powered event planning assistant that helps users organize weddings, birthdays, anniversaries, and community events. It provides AI-generated suggestions and personalized plans, manages budgets, tasks, timelines, vendors, and guest lists, and lets users download their event plans as PDFs using Gemini and Groq.
 
 ## What is included
 
