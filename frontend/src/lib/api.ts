@@ -1,4 +1,4 @@
-export const API = import.meta.env.VITE_API_URL || 'https://evenafter-planner.vercel.app/api'
+export const API = import.meta.env.VITE_API_URL || 'https://evenafter-planner-1.onrender.com'
 export type User = { id: number; name: string; email: string }
 export type AIProviderStatus = { gemini_configured: boolean; gemini_masked: string | null; groq_configured: boolean; groq_masked: string | null; ai_enabled: boolean; primary_provider: 'gemini' | 'none'; fallback_provider: 'groq' | 'none' }
 export type Event = { id: number; owner_id: number; title: string; event_type: string; event_date: string | null; venue: string; location: string; guest_count: number; budget: number; theme: string; notes?: string }
