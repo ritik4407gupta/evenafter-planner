@@ -39,7 +39,8 @@ export default function PlanningAssistantPanel({ event, tasks, onTaskAdded, toas
     const prior = messages.slice(-8)
     // Hide the previous response card while this request runs so a failure can never look like a fresh answer.
     setLatest(null)
-    setMessages(current => [...current, { role: 'user', content: question }].slice(-16))
+    const userMessage: ChatMessage = { role: 'user', content: question }
+    setMessages(current => [...current, userMessage].slice(-16))
     setInput('')
     setLoading(true)
     setLastError('')
@@ -61,7 +62,12 @@ export default function PlanningAssistantPanel({ event, tasks, onTaskAdded, toas
         }),
       })
       setLatest(result)
-      setMessages(current => [...current, { role: 'assistant', content: result.reply, provider: result.generated_by }].slice(-16))
+      const assistantMessage: ChatMessage = {
+        role: 'assistant',
+        content: result.reply,
+        provider: result.generated_by,
+      }
+      setMessages(current => [...current, assistantMessage].slice(-16))
       setAIStatus(current => current ? { ...current, ai_enabled: true } : current)
     } catch (err) {
       const text = err instanceof Error ? err.message : 'The AI provider could not complete this request.'
