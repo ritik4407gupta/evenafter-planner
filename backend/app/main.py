@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from datetime import date, timedelta
 from fastapi import FastAPI, Depends, HTTPException
@@ -13,7 +14,8 @@ from app.routers import auth, events, workspace, ai
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
-    if settings.environment == "development":
+    # Seed demo data in development, or on Vercel/serverless if the database is fresh
+    if settings.environment == "development" or os.environ.get("VERCEL"):
         seed_demo_data()
     yield
 
