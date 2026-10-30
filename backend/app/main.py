@@ -60,8 +60,15 @@ def seed_demo_data():
         db.close()
 
 app = FastAPI(title=settings.app_name, version="1.0.0", description="Event planning workspace with guarded AI plan drafts.", lifespan=lifespan)
-_cors_origins = [o.strip() for o in settings.frontend_origin.split(",") if o.strip()] + ["http://127.0.0.1:5173", "http://localhost:5173"]
-app.add_middleware(CORSMiddleware, allow_origins=list(dict.fromkeys(_cors_origins)), allow_credentials=True, allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], allow_headers=["Authorization", "Content-Type"])
+_cors_origins = [o.strip() for o in settings.frontend_origin.split(",") if o.strip()] + ["http://127.0.0.1:5173", "http://localhost:5173", "https://evenafter-planner.vercel.app"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=list(dict.fromkeys(_cors_origins)),
+    allow_origin_regex=r"https://.*(\.vercel\.app|\.onrender\.com)|http://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
+)
 app.include_router(auth.router); app.include_router(events.router); app.include_router(workspace.router); app.include_router(ai.router)
 
 @app.get("/api/health")

@@ -1,4 +1,5 @@
-export const API = import.meta.env.VITE_API_URL !== undefined ? import.meta.env.VITE_API_URL : (import.meta.env.PROD ? '' : 'http://localhost:8000')
+const envApi = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')
+export const API = (envApi && envApi !== 'http://localhost:8000') ? envApi : 'https://evenafter-planner.vercel.app'
 export type User = { id: number; name: string; email: string }
 export type AIProviderStatus = { gemini_configured: boolean; gemini_masked: string | null; groq_configured: boolean; groq_masked: string | null; ai_enabled: boolean; primary_provider: 'gemini' | 'none'; fallback_provider: 'groq' | 'none' }
 export type Event = { id: number; owner_id: number; title: string; event_type: string; event_date: string | null; venue: string; location: string; guest_count: number; budget: number; theme: string; notes?: string }
